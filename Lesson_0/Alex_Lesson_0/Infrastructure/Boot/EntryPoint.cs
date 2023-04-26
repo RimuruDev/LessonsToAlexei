@@ -1,10 +1,7 @@
 ﻿using System;
-using Microsoft.VisualBasic;
 
 public sealed class EntryPoint
 {
-    private static bool canQuitApplication = false;
-
     public static void Main()
     {
         ProjectLoopPattern loop = new();
