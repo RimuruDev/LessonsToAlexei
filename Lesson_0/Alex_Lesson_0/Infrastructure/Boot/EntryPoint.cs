@@ -50,47 +50,10 @@ public sealed class EntryPoint
 
             // Наш код для выполнения
             {
-                Foreach();
-                Console.WriteLine();
-                Linq();
+                Example_2(dataBase);
             }
 
             Console.WriteLine(input); // Output input
-
-            void Foreach()
-            {
-                foreach (var item in dataBase.Items)
-                {
-                    Console.Write("Item: ");
-                    Console.WriteLine($"ID:{item.ID} Name: {item.Name} Description:{item.Description}");
-                }
-
-                foreach (var person in dataBase.Putans)
-                {
-                    Console.Write("Personal: ");
-                    Console.WriteLine($"Name: {person.Name} Age:{person.Age}");
-                }
-            }
-
-            void Linq()
-            {
-                // v1
-                dataBase.Items
-                    .Where(item => item.Name != "Axe")
-                    .ToList()
-                    .ForEach(item =>
-                    {
-                        Console.Write("Item: ");
-                        Console.WriteLine($"ID:{item.ID} Name: {item.Name} Description:{item.Description}");
-                    });
-
-                // v 2
-                dataBase.Putans.ForEach(person =>
-                {
-                    Console.Write("Personal: ");
-                    Console.WriteLine($"Name: {person.Name} Age:{person.Age}");
-                });
-            }
         });
     }
 
@@ -99,34 +62,46 @@ public sealed class EntryPoint
         ExampleActionSyntaxes exampleActionSyntaxes = new();
         exampleActionSyntaxes.RunExample();
     }
-}
 
-public sealed class DataBase // Model
-{
-    // Одновременно поле, метод Get, метод Set. Или опционально настраиваемо по отдельности или то или другое.
-    public List<Item> Items { get; private set; } = new();
-    public List<Putan> Putans { get; private set; } = new();
+    private static void Example_2(DataBase dataBase)
+    {
+        Foreach();
+        Console.WriteLine();
+        Linq();
 
-    // Old Property version.
-    private List<Item> _Items;
-    public List<Item> GetItems() => Items;
-    public void SetItems(Item item) => Items.Add(item);
+        void Foreach()
+        {
+            foreach (var item in dataBase.Items)
+            {
+                Console.Write("Item: ");
+                Console.WriteLine($"ID:{item.ID} Name: {item.Name} Description:{item.Description}");
+            }
 
-    // Old Property version.
-    private List<Putan> _Putans;
-    public List<Putan> GetPutans() => Putans;
-    public void SetPutan(Putan person) => Putans.Add(person);
-}
+            foreach (var person in dataBase.Putans)
+            {
+                Console.Write("Personal: ");
+                Console.WriteLine($"Name: {person.Name} Age:{person.Age}");
+            }
+        }
 
-public class Putan // Model - Data
-{
-    public string Name { get; set; }
-    public int Age { get; set; }
-}
+        void Linq()
+        {
+            // v1
+            dataBase.Items
+                .Where(item => item.Name != "Axe")
+                .ToList()
+                .ForEach(item =>
+                {
+                    Console.Write("Item: ");
+                    Console.WriteLine($"ID:{item.ID} Name: {item.Name} Description:{item.Description}");
+                });
 
-public class Item // Model - Data
-{
-    public int ID { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
+            // v 2
+            dataBase.Putans.ForEach(person =>
+            {
+                Console.Write("Personal: ");
+                Console.WriteLine($"Name: {person.Name} Age:{person.Age}");
+            });
+        }
+    }
 }
