@@ -5,7 +5,7 @@
     public void Update(Action logicForLoop)
     {
         while (!canQuitApplication)
-            logicForLoop?.Invoke(); // ?. Null Save Invoke - Проверка события на null на подпискиков, или хранится ли в нем что то
+            logicForLoop?.Invoke(); // ?. - The Null Save Invoke
     }
 
     public void QuitApplication() => 
